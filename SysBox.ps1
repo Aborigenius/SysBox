@@ -116,7 +116,7 @@ Title="Sysbox" Height="650" Width="850">
 
 </Menu>
 <TextBox x:Name="username" HorizontalAlignment="Left" Height="23.358" Margin="130.52,28.333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.4" Foreground="Black" Background="White" BorderBrush="#FF252527" SelectionBrush="#FF007ACD" CaretBrush="#FF007ACD"/>
-<TextBox x:Name="computername" HorizontalAlignment="Left" Text="UNSFMWS" Height="24" Margin="130.52,57.667,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.4" Background="White" BorderBrush="#FF252527" CaretBrush="#FF007ACD"/>
+<TextBox x:Name="computername" HorizontalAlignment="Left" Text="YourNamingHere" Height="24" Margin="130.52,57.667,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.4" Background="White" BorderBrush="#FF252527" CaretBrush="#FF007ACD"/>
 <Label x:Name="label" Content="User name" HorizontalAlignment="Left" Height="26.667" Margin="51.048,26.668,0,0" VerticalAlignment="Top" Width="74.472" FontSize="13.333" FontFamily="Khmer UI" Foreground="White"/>
 <Label x:Name="label_Copy" Content="Computer Name" HorizontalAlignment="Left" Height="26.667" Margin="19,56.805,0,0" VerticalAlignment="Top" Width="107.048" FontSize="13.333" FontFamily="Khmer UI" Foreground="White"/>
 <Label x:Name="label1" Content="SysBox" Height="54" Margin="0,27,-20,0" VerticalAlignment="Top" FontSize="32" FontWeight="Bold" FontFamily="Segoe UI Light" HorizontalAlignment="Right" Width="266" Foreground="White"/>
