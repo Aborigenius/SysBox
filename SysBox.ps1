@@ -1,4 +1,4 @@
-#Requires -Version 6.0
+#Requires -Version 7.0
 
 #Lets load some Assemblies first just in case
 Add-Type -AssemblyName System.Windows.Forms -PassThru | Out-Null
@@ -7,12 +7,13 @@ Add-Type -AssemblyName PresentationFramework -PassThru | Out-Null
 add-type -AssemblyName microsoft.VisualBasic -PassThru | Out-Null
 Add-Type -AssemblyName PresentationCore -PassThru | Out-Null
 
+#Load Mahapps 2 libraries
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 $assemblyLocation = Join-Path -Path $scriptPath -ChildPath .\bin
 foreach ($assembly in (Get-ChildItem $assemblyLocation -Filter *.dll)) {
     [System.Reflection.Assembly]::LoadFrom($assembly.FullName) | out-null
 }
- #Focusable="False" makes field unselectable in xml
+ #Focusable="False" makes field unSelect-Objectable in xml
 $shutdown = Join-Path $scriptPath -ChildPath .\img\shutdown.png
 $usericon = Join-Path $scriptPath -ChildPath .\img\user-icon.png
 $computericon = Join-Path $scriptPath -ChildPath .\img\computer.png
@@ -24,7 +25,7 @@ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-Title="Sysbox" Height="650" Width="850">
+Title="SysBox" Height="650" Width="850">
 <Window.Resources>
     <ResourceDictionary>
     <ResourceDictionary.MergedDictionaries>
@@ -34,7 +35,6 @@ Title="Sysbox" Height="650" Width="850">
 </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
 </Window.Resources>
-
     <Grid Background="#FF303A46">
       <TabControl x:Name="tabControl" Margin="0,86.2,0,0" Background="#FF3F3F47" BorderBrush="#FF3F3F47" Style="{DynamicResource MahApps.Styles.TabControl.Animated}"> 
     <TabItem x:Name="usertab" Header="User Account Control" FontFamily="Khmer UI" Background="White" Controls:HeaderedControlHelper.HeaderFontSize="22">
@@ -58,7 +58,6 @@ Title="Sysbox" Height="650" Width="850">
             <TextBox x:Name="infofield" HorizontalAlignment="Right" Height="93.21" Margin="0,32.84,14,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Foreground="#FF7F3D3D" Background="#FFDDDDDD" BorderBrush="#FF777777" Opacity="0.75"/>
             <Label x:Name="infolable" Content="Account Notes -----" HorizontalAlignment="Right" Height="22.84" Margin="0,11,169.8,0" VerticalAlignment="Top" Width="139.2" FontWeight="Bold" Foreground="Black" FontFamily="Khmer UI"/>
             <Button x:Name="unlock" Content="Unlock" HorizontalAlignment="Left" Height="22.266" Margin="10,143.974,0,0" VerticalAlignment="Top" Width="69.866" Background="White" OpacityMask="Black" Foreground="Black"  FontFamily="Khmer UI"/>
-
             <Button x:Name="enable" Content="Enable" HorizontalAlignment="Left" Height="22.266" Margin="84.866,143.974,0,0" VerticalAlignment="Top" Width="69.866" Background="White" Foreground="Black"  FontFamily="Khmer UI"/>
             <Button x:Name="listusergroups" Content="List AD group memberships" Height="22.266" Margin="317.798,143.974,0,0" VerticalAlignment="Top" Background="White" Foreground="Black" HorizontalAlignment="Left" Width="156.402" MaxWidth="156.402"  FontFamily="Khmer UI"/>
             <Button x:Name="passwordinfo" Content="See password information" HorizontalAlignment="Left" Height="22.266" Margin="159.732,143.974,0,0" VerticalAlignment="Top" Width="153.066" Background="White" Foreground="Black"  FontFamily="Khmer UI"/>
@@ -111,20 +110,24 @@ Title="Sysbox" Height="650" Width="850">
     </MenuItem>
     <!--  <MenuItem Header="Scripts" Foreground="White" BorderBrush="#FF383838" Background="#FF3F3F47" FontFamily="Khmer UI" Height="31">
         <MenuItem x:Name="rebuildscript" Header="Rebuild Windows profile" Foreground="Black"/> 
-
     </MenuItem> -->
-
 </Menu>
 <TextBox x:Name="username" HorizontalAlignment="Left" Height="23.358" Margin="130.52,28.333,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.4" Foreground="Black" Background="White" BorderBrush="#FF252527" SelectionBrush="#FF007ACD" CaretBrush="#FF007ACD"/>
-<TextBox x:Name="computername" HorizontalAlignment="Left" Text="YourNamingHere" Height="24" Margin="130.52,57.667,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.4" Background="White" BorderBrush="#FF252527" CaretBrush="#FF007ACD"/>
-<Label x:Name="label" Content="User name" HorizontalAlignment="Left" Height="26.667" Margin="51.048,26.668,0,0" VerticalAlignment="Top" Width="74.472" FontSize="13.333" FontFamily="Khmer UI" Foreground="White"/>
-<Label x:Name="label_Copy" Content="Computer Name" HorizontalAlignment="Left" Height="26.667" Margin="19,56.805,0,0" VerticalAlignment="Top" Width="107.048" FontSize="13.333" FontFamily="Khmer UI" Foreground="White"/>
+<TextBox x:Name="computername" HorizontalAlignment="Left" Text="Naming Conv." Height="24" Margin="130.52,57.667,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100.4" Background="White" BorderBrush="#FF252527" CaretBrush="#FF007ACD"/>
+<Label x:Name="label" Content="User Name:" HorizontalAlignment="Left" Height="26.667" Margin="51.048,26.668,0,0" VerticalAlignment="Top" Width="80" FontSize="13.333" FontFamily="Khmer UI" Foreground="White"/>
+<Label x:Name="label_Copy" Content="Computer Name:" HorizontalAlignment="Left" Height="26.667" Margin="19,56.805,0,0" VerticalAlignment="Top" Width="110" FontSize="13.333" FontFamily="Khmer UI" Foreground="White"/>
 <Label x:Name="label1" Content="SysBox" Height="54" Margin="0,27,-20,0" VerticalAlignment="Top" FontSize="32" FontWeight="Bold" FontFamily="Segoe UI Light" HorizontalAlignment="Right" Width="266" Foreground="White"/>
 <Path Data="M8.8,51.4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="1" Margin="8.8,51.4,0,0" Stretch="Fill" Stroke="Black" VerticalAlignment="Top" Width="1"/>
 <Button x:Name="searchuser" Content="Search" HorizontalAlignment="Left" Height="24" Margin="235.92,28,0,0" VerticalAlignment="Top" Width="62" Background="#FF007ACD"  Foreground="White" BorderBrush="{x:Null}"/>
 <Button x:Name="searchcomputer" IsDefault="True" Content="Search" HorizontalAlignment="Left" Height="24" Margin="235.587,57.667,0,0" VerticalAlignment="Top" Width="62" Background="#FF007ACD"  Foreground="White" BorderBrush="{x:Null}"/>
 <Rectangle HorizontalAlignment="Left" Height="23.358" Margin="236.481,28.333,0,0" Stroke="#FF007ACD" VerticalAlignment="Top" Width="61" StrokeThickness="3"/>
 <Rectangle HorizontalAlignment="Left" Height="23.2" Margin="236.253,58,0,0" Stroke="#FF007ACD" VerticalAlignment="Top" Width="61" StrokeThickness="3"/>
+
+<Label x:Name="whoami" Content="WhoAmI:" HorizontalAlignment="Left" Margin="360,34,0,0" VerticalAlignment="Top" Width="64" FontSize="13.333" FontFamily="Khmer UI" Foreground="White"/>
+<Label x:Name="runmod" Content="Running Mode:" HorizontalAlignment="Left" Margin="330,54,0,0" VerticalAlignment="Top" Width="99" FontSize="13.333" FontFamily="Khmer UI" Foreground="White"/>
+<TextBox x:Name="who" HorizontalAlignment="Left" Height="23.358" Margin="430,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Foreground="Black" Background="White" BorderBrush="#FF252527" SelectionBrush="#FF007ACD" CaretBrush="#FF007ACD"/>
+<TextBox x:Name="RunMode" HorizontalAlignment="Left" Height="23.358" Margin="430,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Foreground="Black" Background="White" BorderBrush="#FF252527" SelectionBrush="#FF007ACD" CaretBrush="#FF007ACD"/>
+
 
     </Grid>
 </Controls:MetroWindow>       
@@ -133,6 +136,29 @@ $PSStyle.OutputRendering = 'Host'
 class AppForm {
     $xamlReader = (New-Object Windows.Markup.XamlReader);
   }
+
+#Import-Module PSReadLine
+#Get-ChildItem "${psdir}\*.psm1" | %{.$_} 
+#Start IN
+Set-Location C:\PowerShell
+
+function prompt {
+	$host.UI.RawUI.WindowTitle = "PowerShell {0}" -f $PSVersionTable.PSVersion.ToString()
+	if ($isAdmin){
+	#Write-host '[' -NoNewline
+	$host.UI.RawUI.WindowTitle += " [ADMIN] "
+	$host.UI.RawUI.WindowTitle += whoami
+    Write-host $PWD -ForegroundColor Cyan -NoNewline
+	Write-host ">" -ForegroundColor Red -NoNewline
+	}
+	else{
+	Write-host $PWD">" -ForegroundColor yellow -NoNewline
+		$host.UI.RawUI.WindowTitle += " [User Mode]"
+	}
+	
+	#Write-host '>' -NoNewline
+	return " "
+}
 #hiding the consol window
 #$t = '[DllImport("user32.dll")] public static extern bool ShowWindow(int handle, int state);'
 #add-type -name win -member $t -namespace native
@@ -147,6 +173,20 @@ $Window = [System.Windows.Markup.XamlReader]::Load($reader)
 $xaml.SelectNodes("//*[@*[contains(translate(name(.),'n','N'),'Name')]]")  | ForEach {
 New-Variable  -Name $_.Name -Value $Window.FindName($_.Name) -Force
 } 
+
+$ident = [Security.Principal.WindowsIdentity]::GetCurrent()
+$principal = New-Object Security.Principal.WindowsPrincipal $ident
+$isAdmin = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator) 
+
+if ($isAdmin){
+    $RunMode.Text = "Admin Mode"
+	}
+	else{
+        $RunMode.Text = "User Mode"
+	}
+
+$who.Text = $ident.Name
+
 #endregion
 
 #region MISC FUNCTIONS
@@ -189,7 +229,7 @@ Function Invoke-BalloonTip {
         [System.Windows.Forms.ToolTipIcon]$MessageType="Info",
      
         [Parameter(HelpMessage="The path to a file to use its icon in the system tray")]
-        [string]$SysTrayIconPath='C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe',     
+        [string]$SysTrayIconPath='C:\Program Files\PowerShell\7\pwsh.exe',     
 
         [Parameter(HelpMessage="The number of milliseconds to display the message.")]
         [int]$Duration=1000
@@ -249,17 +289,17 @@ Param([string]$Message="This is a default Message.",
 #--------------------------------------------------------------------------------------- 
 
 #User search
-function Get-userandsetdatafields {
+function Get-UserAndAetDataFields {
 #set AD property values
-$rawinfo = Get-ADUser -identity $username.Text -properties Description, Enabled, CN, DisplayName, EmailAddress, EmployeeNumber, EmployeeType, HomeDirectory, HomeDrive, Manager, Title, LastBadPasswordAttempt, LastLogonDate, LockedOut | fl | out-string
-$firstname = get-aduser $username.Text -properties * | select -expandproperty givenname
-$lastname = get-aduser $username.Text -properties * | select -expandproperty surname
-$email = get-aduser $username.Text -properties * | select -expandproperty emailaddress
-$Title = get-aduser $username.Text -properties * | select -expandproperty title
-$phone = get-aduser $username.Text -properties * | select -expandproperty telephonenumber
-$lockstatus = get-aduser $username.Text -properties * | select -expandproperty lockedout
-$accountstatus = get-aduser $username.Text -properties * | select -expandproperty Enabled
-$infocontent = get-aduser $username.Text -properties * | select -expandproperty Description
+$rawinfo = Get-ADUser -identity $username.Text -properties Description, Enabled, CN, DisplayName, EmailAddress, EmployeeNumber, EmployeeType, HomeDirectory, HomeDrive, Manager, Title, LastBadPasswordAttempt, LastLogonDate, LockedOut | Format-List | out-string
+$firstname = Get-ADUser $username.Text -properties * | Select-Object -expandproperty givenname
+$lastname = Get-ADUser $username.Text -properties * | Select-Object -expandproperty surname
+$email = Get-ADUser $username.Text -properties * | Select-Object -expandproperty emailaddress
+$Title = Get-ADUser $username.Text -properties * | Select-Object -expandproperty title
+$phone = Get-ADUser $username.Text -properties * | Select-Object -expandproperty telephonenumber
+$lockstatus = Get-ADUser $username.Text -properties * | Select-Object -expandproperty lockedout
+$accountstatus = Get-ADUser $username.Text -properties * | Select-Object -expandproperty Enabled
+$infocontent = Get-ADUser $username.Text -properties * | Select-Object -expandproperty Description
 
 
 #Set Data feilds
@@ -274,7 +314,7 @@ $infofield.Text = "$infocontent"
 $rawoutput.text = "$($rawinfo.TrimStart())"
 
 #If statement for setting color or lockout
-if((Get-Aduser $username.Text -Properties LockedOut).LockedOut -eq $true) {
+if((Get-ADUser $username.Text -Properties LockedOut).LockedOut -eq $true) {
 $lockoutfield.Foreground = "Red"
 }ELSE{
 $lockoutfield.Foreground = "Green"
@@ -282,7 +322,7 @@ $lockoutfield.Foreground = "Green"
 
 
 #If statement for setting color of Enabled field
-if((Get-Aduser $username.Text -Properties Enabled).Enabled -eq $False) {
+if((Get-ADUser $username.Text -Properties Enabled).Enabled -eq $False) {
 $enabledfield.foreground = "Red"
 }ELSE{
 $enabledfield.foreground = "Green"
@@ -292,14 +332,14 @@ $enabledfield.foreground = "Green"
 
 #Computer search
 
-function Get-computerandsetdatafields {
+function Get-ComputerAndSetatafields {
 
 $ipv4 = Get-ADComputer $computername.Text -Properties *| Select-Object -ExpandProperty IPV4Address 
 $mac = Get-CimInstance -ComputerName $computername.Text -ClassName Win32_NetworkAdapterConfiguration -Filter "IPEnabled='True'" | Select-Object -ExpandProperty MACAddress 
 $currentuser = Get-CimInstance -ComputerName $computername.Text -ClassName Win32_ComputerSystem |  Select-Object -ExpandProperty UserName
 
 $OSinfo = Get-CimInstance Win32_OperatingSystem | Select-Object Caption, BuildNumber, RegisteredUser, InstallDate | Format-List | out-string
-$fullinfo = Get-adcomputer $computername.Text | out-string
+$fullinfo = Get-ADComputer $computername.Text | out-string
 $fullinfo
 #BIOS/CPU Serial
 $Bios = Get-CimInstance -ClassName win32_bios -ComputerName $computername.Text
@@ -312,7 +352,7 @@ $monitor = Get-CimInstance -Namespace root\wmi -ClassName wmimonitorid -Computer
 $monser = ($monitor.SerialNumberID -notmatch '^0$' | ForEach-Object {[char]$_}) -join ""
 
 #Uptime
-$Uptime = (get-date) - (gcim -computername $computername.Text -ClassName Win32_OperatingSystem).LastBootUpTime  
+$Uptime = (get-date) - (Get-CimInstance -computername $computername.Text -ClassName Win32_OperatingSystem).LastBootUpTime  
 
 #set fields with queried computer info
 $ipfield.text = $ipv4 + " / " + $mac
@@ -332,29 +372,29 @@ $MonitorSerialField.Text = $monser
 #--------------------------------------------------
 #get password stuff
 function get-passwordinfo {
-$expiredate = Get-ADUser -identity $username.Text -Properties msDS-UserPasswordExpiryTimeComputed | select samaccountname,@{ Name = "Expiration Date"; Expression={[datetime]::FromFileTime($_."msDS-UserPasswordExpiryTimeComputed")}} | Format-Table -AutoSize | Out-string
+$expiredate = Get-ADUser -identity $username.Text -Properties msDS-UserPasswordExpiryTimeComputed | Select-Object samaccountname,@{ Name = "Expiration Date"; Expression={[datetime]::FromFileTime($_."msDS-UserPasswordExpiryTimeComputed")}} | Format-Table -AutoSize | Out-string
 $setdate = Get-ADUser -Identity $username.Text -Properties PasswordLastSet | Select-Object PasswordLastSet | ft | out-string
 $rawoutput.text = "$setdate $expiredate"
 }
 
 #unlock
-Function unlockuser {
-if((Get-Aduser $username.Text -Properties LockedOut).LockedOut -eq $true)
+Function unlockUser {
+if((Get-ADUser $username.Text -Properties LockedOut).LockedOut -eq $true)
 {
 Unlock-ADAccount -Identity $username.Text
 Show-MessageBox -Title "Unlock User" -Message "User account has been unlocked" -Type Information
-Get-userandsetdatafields
+Get-UserAndAetDataFields
 }else{
 Show-MessageBox -title "Oops" -Message "User account is not locked" -type Exclamation
-Get-userandsetdatafields           
+Get-UserAndAetDataFields           
 }
 }
 
 #Enable
-Function enableuser {
-if((Get-Aduser $username.Text -Properties Enabled).Enabled -eq $true) {
+Function enableUser {
+if((Get-ADUser $username.Text -Properties Enabled).Enabled -eq $true) {
 Show-MessageBox -Title "Enable User" -Message "User account is already enabled" -Type Exclamation
-Get-userandsetdatafields 
+Get-UserAndAetDataFields 
 }ELSE{
 $date = Get-Date -Format g
 Enable-AdAccount $username.Text
@@ -366,7 +406,7 @@ Show-MessageBox -Title "Enable User" -Message "User account enabled" -Type Infor
 #get ad groups
 function ADGroupsOfUser {
     $usertoken = $username.Text
-    Get-ADPrincipalGroupMembership $usertoken | select name | Sort-object -property name | out-gridview
+    Get-ADPrincipalGroupMembership $usertoken | Select-Object name | Sort-object -property name | out-gridview
     #$rawoutput.Text = $accessgroups.Trim()
     }
 #endregion
@@ -381,9 +421,9 @@ Function start-remote {
 start-process -FilePath "C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\i386\CmRcviewer.exe" $computername.Text
 }
 
-Function start-vnc {
-& "C:\Program Files\uvnc bvba\UltraVNC\vncviewer.exe" $computername.Text
-}
+#Function start-vnc {
+#& "C:\Program Files\uvnc bvba\UltraVNC\vncviewer.exe" $computername.Text
+#}
 
 Function start-rdp {
 Start-Process "$env:windir\system32\mstsc.exe" -ArgumentList "/v:$($computername.Text)"
@@ -444,6 +484,7 @@ Function Get-Uptime {
     end{}
 }
 
+#Update SCCM client Machine Policy
 Function update-policy {
 $strAction = "{00000000-0000-0000-0000-000000000021}"
 $WMIPath = "\\$($computername.Text)\root\ccm:SMS_Client" 
@@ -455,16 +496,16 @@ Show-MessageBox -type Information -title "Refresh machine policy" -Message "Mach
 function ADGroupsOfComp {
     $comp = $computername.Text
     $comp = $comp + "$"
-    Get-ADPrincipalGroupMembership -identity $comp | select name | Sort-object -property name | Out-GridView
+    Get-ADPrincipalGroupMembership -identity $comp | Select-Object name | Sort-object -property name | Out-GridView
     #foreach-object {$Listview.Items.Add($_.Name)}
     #$computeroutput.Text = $accessgroups.Trim()
     }
 
-Function ping-t {start-process cmd
+Function ping-t {start-process pwsh
 
 start-sleep -Milliseconds 500
 
-[Microsoft.VisualBasic.Interaction]::AppActivate("cmd.exe")
+[Microsoft.VisualBasic.Interaction]::AppActivate("pwsh.exe")
 
 [System.Windows.Forms.SendKeys]::SendWait("ping $($computername.Text) -t")
 [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
@@ -474,9 +515,9 @@ start-sleep -Milliseconds 500
 #   
 #    $user = $username.Text
 #    $computer = $computername.Text
-#    $SID = Get-Aduser $user -Properties * | select -ExpandProperty SID
+#    $SID = Get-ADUser $user -Properties * | Select-Object -ExpandProperty SID
 #    $SID1 = $SID.Value
-#    $newprofile = Get-Aduser $user -Properties * | select -ExpandProperty SAMAccountName
+#    $newprofile = Get-ADUser $user -Properties * | Select-Object -ExpandProperty SAMAccountName
 #    Rename-Item "\\$computer\c$\users\$user" -NewName "$user.old"
 # #Shows message to indicate old profile rename
 #    Show-MessageBox -Message "Old profile folder is now renamed to $user.old Press OK to continue creating new profile." -Type Information
@@ -504,7 +545,7 @@ Function restartservice{
 }
 
 Function Kill-Process {
-(Get-CimInstance Win32_Process -ComputerName $computername.text) | Select-object Name, ExecutablePath | Out-GridView -PassThru -Title "Select an application to end by clicking OK"
+(Get-CimInstance Win32_Process -ComputerName $computername.text) | Select-Object Name, ExecutablePath | Out-GridView -PassThru -Title "Select-Object an application to end by clicking OK"
 #get-process -Computername $computername.Text | out-gridview -PassThru | Stop-Process -Force
 }
 
@@ -551,7 +592,7 @@ $snippingtool.add_Click({Open-Snippingtool})
 $searchuser.add_Click({
 $tabControl.Items[0].IsSelected = $True
 if (dsquery user -samid $username.Text){
-Get-userandsetdatafields
+Get-UserAndAetDataFields
 }ELSE{
 Show-MessageBox -Title "Error" -Type Stop -Message "User account not found"
 }
@@ -567,8 +608,8 @@ Show-MessageBox -Title "Error" -Type Stop -Message "User account not found"
 
 
 $passwordinfo.add_click({get-passwordinfo})
-$unlock.add_click({unlockuser})
-$enable.add_click({enableuser})
+$unlock.add_click({unlockUser})
+$enable.add_click({enableUser})
 
 
 
@@ -581,7 +622,7 @@ $enable.add_click({enableuser})
 $searchcomputer.add_click({
 $tabControl.Items[1].IsSelected = $True
 If (Test-Connection $computername.Text -count 1 -quiet) {
-Get-computerandsetdatafields
+Get-ComputerAndSetatafields
 }ELSE{
 Show-MessageBox -Title "Error" -Type Stop -Message "Computer offline or does not exist."
 }
@@ -606,5 +647,3 @@ $updatepolicy.add_Click({update-policy})
 
  #buttonstate
   $Window.ShowDialog()
-  
-  
