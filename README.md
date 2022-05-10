@@ -6,4 +6,6 @@ Set $PSStyle.OutputRendering = 'Host' added due to additional characters added i
 Removed Secondary Menu Item because it is obsolete nowdays, it's just commented. Added some additional fields (CPUSerial, HddSerial,
 Monitor Serial Numbers) which I find useful. Removed VNC button, I am not using it, just commented as well. 
 Assigned Enter to Computer Search - it is mostly used button. SCCM Remote pointed to MECM Console Path. Small fixes were needed to 
-make restart-process and few other functions work with PowerShell Core.
+make restart-process and few other functions work with PowerShell Core. 
+
+Additional textboxes added showing the user running the script and running mode - user or admin. 
