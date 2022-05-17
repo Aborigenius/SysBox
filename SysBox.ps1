@@ -345,7 +345,7 @@ $fullinfo
 $Bios = Get-CimInstance -ClassName win32_bios -ComputerName $computername.Text
 
 #HDD Info
-$hddSerial = Get-CimInstance Win32_DiskDrive -Property * | Select-Object -expandproperty SerialNumber
+$hddSerial = Get-CimInstance Win32_DiskDrive -ComputerName $computername.Text -Property * | Select-Object -expandproperty SerialNumber
 
 #Monitor Info
 $monitor = Get-CimInstance -Namespace root\wmi -ClassName wmimonitorid -ComputerName $computername.Text
